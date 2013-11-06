@@ -22,6 +22,11 @@ bots: bot.c gameio.h
 engine: engine.c gameio.h
 	$(CC) $(CFLAGS) $< -o $@
 
+swap:
+	mv bot1 .tmp_bot
+	mv bot2 bot1
+	mv .tmp_bot bot2
+
 clean:
 	rm -rf bot1
 	rm -rf bot2
