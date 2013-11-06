@@ -1,0 +1,36 @@
+RULES : http://mathwithbaddrawings.com/2013/06/16/ultimate-tic-tac-toe/
+ 
+ 
+You can NOT play in an already won square
+By default - a square which has ended in a tie game is considered as won by neither players and remains as a void square in the big grid.
+
+
+
+DATA FILES FORMAT (Board.dat)
+
+1st 9 lines : 9x9 matrix for the board containing 'X', 'O', '.'
+Tenth line : "x y" the grid to play in (x,y=0,1,2) ... any-grid is denoted as "-1 -1"
+
+See attachment
+
+All program files should be in 1 folder only...
+
+All Games start with 'X' as 1st player
+O is the capital letter, not the number...
+X is the capital letter
+. is blank space
+
+
+so if number of X's = number of O's => X's turn
+and if number of X's = number of O's + 1 => O's turn
+
+
+
+Win Objective : To win 3 games in a row in the bigger board
+
+
+
+Your bot.c will be a separate program (with main function) which will be called from within the engine...
+
+bot executable names must be "bot1" and bot2"
+
