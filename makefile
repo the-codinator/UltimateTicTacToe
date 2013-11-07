@@ -5,8 +5,7 @@ CC=gcc
 CFLAGS=-Wall -g
 LDFLAGS=-lm
 
-play: bot1 bot2 engine
-	./engine
+all: engine bots
 
 bot1: bot1.c gameio.h
 	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
@@ -32,3 +31,4 @@ clean:
 	rm -rf bot2
 	rm -rf engine
 	rm -rf Board.dat
+

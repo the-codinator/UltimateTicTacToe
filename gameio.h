@@ -24,6 +24,6 @@ void output2user(char** board, int x, int y);
 // Prints the board to @SOURCE
 // x,y denotes next position to play
 // Board is input as a 4D char array
-void output2file(char** board, int x, int y);
+void output2file(char**** board, int x, int y);
 
 #endif //io_

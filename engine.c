@@ -6,6 +6,6 @@
 #define BOT1 system("./bot1");
 #define BOT2 system("./bot2");
 
-void main() {
-    
+int main() {
+    return 0;
 }
