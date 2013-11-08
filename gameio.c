@@ -3,7 +3,7 @@
 #include "gameio.h"
 
 char** input2D(int* x, int* y) {
-    FILE* fp = fopen(SOURCES, "r");
+    FILE* fp = fopen(SOURCE, "r");
     int i,j;
     char** mat = (char**) malloc(9*sizeof(char*));
     for (i=0; i<9; i++) {
@@ -12,7 +12,7 @@ char** input2D(int* x, int* y) {
             mat[i][j] = fgetc(fp);
         fgetc(fp);
     }
-    fscanf("%d %d", x, y);
+    fscanf(fp, "%d %d", x, y);
     fclose(fp);
     return mat;
 }
