@@ -26,4 +26,9 @@ void output2user(char** board, int x, int y);
 // Board is input as a 4D char array
 void output2file(char**** board, int x, int y);
 
+
+// Converts the 2D 9x9 board to 4D 3x3x3x3 board
+// Does not free memory associated with @mat2
+char**** mat2Dto4D(char** mat2);
+
 #endif //io_
