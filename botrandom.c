@@ -55,6 +55,9 @@ int main()
             }
         }
     }
+    output2user(mat4,  x,  y);
+    output2file(mat4,  x,  y);
+    return 0;
 }
 char toplayXorO(char**** mat4)
 {
