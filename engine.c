@@ -9,12 +9,14 @@
 
 // Prints a string letter ny letter with time gap of 1/9 secs
 void styleprint(char* s) {
-    struct timespec tim, tim2;
-    tim.tv_sec  = 0;
-    tim.tv_nsec = 111111111L;
+    struct timespec tim;
     int i;
-    for (i=0; s[i] != '\n'; i++) {
+    for (i=0; s[i] != '\0'; i++) {
         printf("%c", s[i]);
+        fflush(stdout);
+        tim.tv_sec  = 0;
+        tim.tv_nsec = 111111111L;
+        struct timespec tim2;
         nanosleep(&tim, &tim2);
     }
     printf("\n");
@@ -31,13 +33,36 @@ void welcome() {
     printf("================================\n");
     printf("      Ultimate Tic Tac Toe      \n");
     printf("================================\n");
-    styleprint("\n Game Simulation between bot1 and bot2 .....");
+    styleprint("\nGame Simulation between bot1 and bot2 .....");
+    sleep(2);
+}
+
+// Checks a 3x3 board to see who won
+// 1 => bot1 wins, 2 => bot2 wins, 0 => draw/tie, -1 => incomplete game
+int check3x3(char board[3][3]) {
+    return -1;
 }
 
 // Checks whether the board is a won game
-// 1 => bot1 wins, 2 => bot2 wins, 0 => draw/tie, -1 => incomplete game 
+// 1 => bot1 wins, 2 => bot2 wins, 0 => draw/tie, -1 => incomplete game
 int check(char** board) {
-    return -1;
+    char bigBoard[3][3];
+    int i, j, k, l;
+    for (i=0; i<3; i++) {
+        for (j=0; j<3; j++) {
+            char smallBoard[3][3];
+            for (k=0; k<3; k++) {
+                for (l=0; l<3; l++) {
+                    smallBoard[k][l]=board[3*i+k][3*j+l];
+                }
+            }
+            int x = check3x3(smallBoard);
+            if (x == 2) bigBoard[i][j] = 'O';
+            else if (x == 1) bigBoard[i][j] = 'X';
+            else bigBoard[i][j] = '.';
+        }
+    }
+    return check3x3(bigBoard);
 }
 
 // Create a blank board to play in
@@ -58,7 +83,8 @@ int main() {
     char** board = input2D(&x, &y);
     int move=1, j;
     
-    while ((j=check(board)) == -1) {
+    while (move<17 || (j=check(board)) == -1) {
+        system("clear");
         output2user(board, x, y);
         
         if (move%2)
