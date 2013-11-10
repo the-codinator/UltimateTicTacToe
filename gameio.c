@@ -43,10 +43,34 @@ char**** mat2Dto4D(char** mat2) {
 }
 
 void output2user(char** board, int x, int y) {
-    ca
+    int i,j;
+    for(i=0;i<9;i++)
+    {
+        for(i=0;i<9;i++)
+            printf("%d",board[i][j]);
+        printf("/n");
+    }
+    printf("%d %d",x,y);
 
 }
 
 void output2file(char**** board, int x, int y) {
-
+    FILE* fp = fopen(TEMP, "w");
+    int i,j,k,l;
+    for(i=0;i<3;i++)
+    {
+        for(i=0;i<3;i++)
+        {
+            for(i=0;i<3;i++)
+            {
+                for(i=0;i<3;i++)
+                    fprintf(fp,"%d",board[i][j][k][l]);
+            }
+            fprintf("/n");
+        }
+    }
+    fprintf("%d %d",x,y);
+    remove(SOURCE);
+    rename(TEMP, SOURCE);
+    fclose(fp);
 }
