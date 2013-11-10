@@ -43,9 +43,10 @@ char**** mat2Dto4D(char** mat2) {
 }
 
 void output2user(char** board, int x, int y) {
-    
+    ca
+
 }
 
 void output2file(char**** board, int x, int y) {
-    
+
 }
