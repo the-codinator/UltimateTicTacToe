@@ -40,8 +40,19 @@ int check(char** board) {
     return -1;
 }
 
+// Create a blank board to play in
+void makeBlankBoard() {
+    FILE* fp = fopen(SOURCE, "w");
+    char* s = ".........\n";
+    fprintf(fp, "%s%s%s%s%s%s%s%s%s-1 -1\n",
+        s, s, s, s, s, s, s, s, s);
+    fclose(fp);
+}
+
 int main() {
     welcome();
+    
+    makeBlankBoard();
     
     int x, y;
     char** board = input2D(&x, &y);
