@@ -17,15 +17,15 @@ int main() {
             else bigBoard[i][j] = '.';
         }
     }
-    
+
     if (x!=-1 && y!=-1 && bigBoard[x][y]!='.')
         x=y=-1;
-    
+
     // Analysis
-    
+
     //TODO: A lot of things here
-    
-    
+
+
     // Output
     k=check3x3(board[x][y]);
     if (k == 2) {
@@ -37,6 +37,7 @@ int main() {
         x=y=-1;
     }
     else bigBoard[x][y] = '.';
-    
+    output2file(board,x,y);
+
     return 0;
 }
