@@ -37,40 +37,6 @@ void welcome() {
     sleep(2);
 }
 
-// Checks a 3x3 board to see who won
-// 1 => bot1 wins, 2 => bot2 wins, 0 => draw/tie, -1 => incomplete game
-int check3x3(char board[3][3]) {
-    int i, row, col;
-    
-    // All horizontal and vertical lines
-    for (i=0; i<3; i++) {
-        row = board[i][0]+board[i][1]+board[i][2];
-        col = board[0][i]+board[1][i]+board[2][i];
-        if (row == 3*'X' || col == 3*'X')
-            return 1;
-        else if (row == 3*'O' || col == 3*'O')
-            return 2;
-    }
-    
-    // Both diagonals
-    if ((board[1][1]==board[0][0] && board[1][1] == board[2][2]) || 
-        (board[1][1]==board[2][0] && board[1][1] == board[0][2]))
-    {
-        if (board[1][1] == 'X')
-            return 1;
-        else if (board[1][1] == 'O')
-            return 0;
-        else return -1;     // Diagonals consist of a line of 3 blank spaces
-    }
-    
-    for (row=0; row<3; row++)
-        for (col=0; col<3; col++)
-            if (board[row][col] == '.')
-                return -1;  // Incomplete board
-    
-    return 0;
-}
-
 // Checks whether the board is a won game
 // 1 => bot1 wins, 2 => bot2 wins, 0 => draw/tie, -1 => incomplete game
 int check(char** board) {
@@ -112,7 +78,6 @@ int main() {
     int move=1, j;
     
     while (move<17 || (j=check(board)) == -1) {
-        system("clear");
         output2user(board, x, y);
         
         if (move%2)

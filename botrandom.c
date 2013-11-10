@@ -1,21 +1,17 @@
 //a bot which plays at the first available place in the 9*9 grid
 #include <math.h>
-#include <gamio.h>
+#include <stdbool.h>
+#include "gameio.h"
+
 char toplayXorO(char**** mat4);
+
+
 int main()
 {
-    int *x;
-    int *y;
-     char**** mat4 = (char****) malloc(3*sizeof(char***));
+    int x;
+    int y;
     int i,j,k,l;
-    for (i=0; i<3; i++) {
-        mat4[i] = (char***) malloc(3*sizeof(char**));
-        for (j=0; j<3; j++) {
-            mat4[i][j] = (char**) malloc(3*sizeof(char*));
-            for (k=0; k<3; k++) {
-                mat4[i][j][k] = (char*) malloc(3*sizeof(char));
-
-    mat4=input4D(x,y);
+    char**** mat4=input4D(&x,&y);
     char play=toplayXorO(mat4);
     if(x==-1)
     {
@@ -28,11 +24,12 @@ int main()
                 {
                     for(l=0;!dobreak &&l<3;l++)
                     {
-                        if(mat4[i][j][k][l]=='X'||mat4[i][j][k][l]=='O')
-                        else
+                        if(mat4[i][j][k][l]=='.')
                         {
-                            mat4[i][j][k][l]==play;
-                            break;
+                            mat4[i][j][k][l]=play;
+                            dobreak=true;
+                            x=k;
+                            y=l;
                         }
                     }
                 }
@@ -46,19 +43,21 @@ int main()
         {
             for(l=0;!dobreak &&l<3;l++)
             {
-                if(mat4[x][y][k][l]=='X'||mat4[x][y][k][l]=='O')
-                else
+                if(mat4[x][y][k][l]=='.')
                 {
-                    mat4[x][y][k][l]==play;
-                    break;
+                    mat4[x][y][k][l]=play;
+                    dobreak=true;
+                    x=k;
+                    y=l;
                 }
             }
         }
     }
-    output2user(mat4,  x,  y);
-    output2file(mat4,  x,  y);
+    output2file(mat4, x, y);
     return 0;
 }
+
+// X plays first, returns whose turn to play based on number of X and O
 char toplayXorO(char**** mat4)
 {
     int i,j,k,l;

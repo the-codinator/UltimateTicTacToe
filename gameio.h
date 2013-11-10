@@ -31,4 +31,8 @@ void output2file(char**** board, int x, int y);
 // Does not free memory associated with @mat2
 char**** mat2Dto4D(char** mat2);
 
+// Checks a 3x3 board to see who won
+// 1 => bot1 wins, 2 => bot2 wins, 0 => draw/tie, -1 => incomplete game
+int check3x3(char board[3][3]);
+
 #endif //io_

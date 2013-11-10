@@ -44,33 +44,65 @@ char**** mat2Dto4D(char** mat2) {
 
 void output2user(char** board, int x, int y) {
     int i,j;
+    system("clear");
     for(i=0;i<9;i++)
     {
-        for(i=0;i<9;i++)
-            printf("%d",board[i][j]);
-        printf("/n");
+        for(j=0;j<9;j++)
+            printf("%c",board[i][j]);
+        printf("\n");
     }
     printf("%d %d",x,y);
-
 }
 
 void output2file(char**** board, int x, int y) {
-    FILE* fp = fopen(TEMP, "w");
+    FILE* fp = fopen("TEMP", "w");
     int i,j,k,l;
     for(i=0;i<3;i++)
     {
-        for(i=0;i<3;i++)
+        for(j=0;j<3;j++)
         {
-            for(i=0;i<3;i++)
+            for(k=0;k<3;k++)
             {
-                for(i=0;i<3;i++)
-                    fprintf(fp,"%d",board[i][j][k][l]);
+                for(l=0;l<3;l++)
+                    fprintf(fp,"%c",board[i][k][j][l]);
             }
-            fprintf("/n");
+            fprintf(fp, "\n");
         }
     }
-    fprintf("%d %d",x,y);
+    fprintf(fp, "%d %d\n",x,y);
     remove(SOURCE);
-    rename(TEMP, SOURCE);
+    rename("TEMP", SOURCE);
     fclose(fp);
+}
+
+int check3x3(char board[3][3]) {
+    int i, row, col;
+    
+    // All horizontal and vertical lines
+    for (i=0; i<3; i++) {
+        row = board[i][0]+board[i][1]+board[i][2];
+        col = board[0][i]+board[1][i]+board[2][i];
+        if (row == 3*'X' || col == 3*'X')
+            return 1;
+        else if (row == 3*'O' || col == 3*'O')
+            return 2;
+    }
+    
+    // Both diagonals
+    if ((board[1][1]==board[0][0] && board[1][1] == board[2][2]) || 
+        (board[1][1]==board[2][0] && board[1][1] == board[0][2]))
+    {
+        if (board[1][1] == 'X')
+            return 1;
+        else if (board[1][1] == 'O')
+            return 2;
+        else return -1;     // Diagonals consist of a line of 3 blank spaces
+    }
+    
+    for (row=0; row<3; row++)
+        for (col=0; col<3; col++)
+            if (board[row][col] == '.')
+                return -1;  // Incomplete board
+    
+    return 0;
 }
