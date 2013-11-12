@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "gameio.h"
+#include "o2u"
 
 char** input2D(int* x, int* y) {
     FILE* fp = fopen(SOURCE, "r");
@@ -42,18 +43,6 @@ char**** mat2Dto4D(char** mat2) {
     return mat4;
 }
 
-void output2user(char** board, int x, int y) {
-    int i,j;
-    system("clear");
-    for(i=0;i<9;i++)
-    {
-        for(j=0;j<9;j++)
-            printf("%c",board[i][j]);
-        printf("\n");
-    }
-    printf("%d %d",x,y);
-}
-
 void output2file(char**** board, int x, int y) {
     FILE* fp = fopen("TEMP", "w");
     int i,j,k,l;
@@ -75,7 +64,7 @@ void output2file(char**** board, int x, int y) {
     fclose(fp);
 }
 
-int check3x3(char board[3][3]) {
+int check3x3(char** board) {
     int i, row, col;
     
     // All horizontal and vertical lines

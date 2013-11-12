@@ -30,6 +30,7 @@ void waiting() {
 
 // Print a game start message
 void welcome() {
+    system("clear");
     printf("================================\n");
     printf("      Ultimate Tic Tac Toe      \n");
     printf("================================\n");
@@ -40,23 +41,32 @@ void welcome() {
 // Checks whether the board is a won game
 // 1 => bot1 wins, 2 => bot2 wins, 0 => draw/tie, -1 => incomplete game
 int check(char** board) {
-    char bigBoard[3][3];
     int i, j, k, l;
+    char** bigBoard = (char**) malloc(3*sizeof(char));
+    char**** mat4 = mat2Dto4D(board);
+    for (i=0; i<3; i++) {
+        bigBoard[i] = (char*) malloc(3*sizeof(char));
+        for (j=0; j<3; j++) {
+            k=check3x3(mat4[i][j]);
+            if (k == 2)
+                bigBoard[i][j] = 'O';
+            else if (k == 1)
+                bigBoard[i][j] = 'X';
+            else bigBoard[i][j] = '.';
+        }
+    }
     for (i=0; i<3; i++) {
         for (j=0; j<3; j++) {
-            char smallBoard[3][3];
-            for (k=0; k<3; k++) {
-                for (l=0; l<3; l++) {
-                    smallBoard[k][l]=board[3*i+k][3*j+l];
-                }
-            }
-            int x = check3x3(smallBoard);
+            int x = check3x3(mat4[i][j]);
             if (x == 2) bigBoard[i][j] = 'O';
             else if (x == 1) bigBoard[i][j] = 'X';
             else bigBoard[i][j] = '.';
         }
     }
-    return check3x3(bigBoard);
+    i = check3x3(bigBoard);
+    free(bigBoard);
+    free(mat4);
+    return i;
 }
 
 // Create a blank board to play in
@@ -77,20 +87,20 @@ int main() {
     char** board = input2D(&x, &y);
     int move=1, j;
     
+    output2user(board, x, y);
     while (move<17 || (j=check(board)) == -1) {
-        output2user(board, x, y);
+        int play;
         
         if (move%2)
-            BOT1
-        else BOT2
+            play = BOT1
+        else play = BOT2
         
         free(board);
         waiting();
         board = input2D(&x, &y);
         move++;
+        output2user(board, x, y);
     }
-    
-    output2user(board, x, y);
     
     if (j==1) {
         styleprint("\nGame Over!\nbot1 has won the game .....");

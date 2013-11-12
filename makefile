@@ -24,7 +24,7 @@ game: engine.o gameio.o
 engine.o: engine.c gameio.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-gameio.o: gameio.c gameio.h
+gameio.o: gameio.c gameio.h o2u
 	$(CC) -c $(CFLAGS) $< -o $@
 
 swap:
