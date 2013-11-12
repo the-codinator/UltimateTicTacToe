@@ -20,7 +20,7 @@ int xLbest,yLbest,xSbest,ySbest;
 
 int maxLev;
 
-int main(int argc,char *argv)
+int main(int argc,char **argv)
 {
     // Init
     int xL,yL,xS,yS;
@@ -37,8 +37,8 @@ int main(int argc,char *argv)
     maxLev = 8;
     
     int lX = -1, lY = -1;
-    int ok = 0;
-    // ok = playComputer(lX,lY,&lX,&lY); // For computer start
+    int ok = 0;                         // For Human start
+    //int ok = playComputer(lX,lY,&lX,&lY); // For computer start
     while(!ok) {
         ok = playHuman(lX,lY,&lX,&lY);
         if(!ok)
@@ -146,7 +146,7 @@ int playComputer(int lX,int lY,int *xSp,int *ySp)
         fflush(stdout);
         res = recur(1,lX,lY,0,1000000);
         t = (clock()-tStart);
-        printf("   %6d second(s) -> res = %d\n",t/CLOCKS_PER_SEC,res);
+        printf("   %6ld second(s) -> res = %d\n",t/CLOCKS_PER_SEC,res);
     }
     if(res==1000000)
         printf("I will win for sure now...\n");
@@ -174,7 +174,6 @@ void setBest(int xL,int yL,int xS, int yS)
 
 int recur(int val,int lX,int lY,int lev,int prevMinMax)
 {
-    int i;
     if(lev==maxLev)
         return evalue();
     int res = (val==1?-1000000:1000000);

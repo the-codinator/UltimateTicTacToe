@@ -41,7 +41,7 @@ void welcome() {
 // Checks whether the board is a won game
 // 1 => bot1 wins, 2 => bot2 wins, 0 => draw/tie, -1 => incomplete game
 int check(char** board) {
-    int i, j, k, l;
+    int i, j, k;
     char** bigBoard = (char**) malloc(3*sizeof(char));
     char**** mat4 = mat2Dto4D(board);
     for (i=0; i<3; i++) {

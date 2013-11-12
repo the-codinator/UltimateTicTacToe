@@ -61,7 +61,7 @@ int main() {
     for (i=0; i<3; i++) {
         for (j=0; j<3; j++) {
             if (board[x][y][i][j] == '.') {
-                play = 3*(3*x+i)+(3*y+j);
+                play = 9*(3*x+i)+(3*y+j);
                 board[x][y][i][j] = turn;
                 x=i;
                 y=j;
