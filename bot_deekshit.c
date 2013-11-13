@@ -93,7 +93,7 @@ void playbot(char**** board,int *x,int *y)
         int i;
         //specifications of bigboard
         // 0 if it hasent been won and cannot be won by playing in this move
-        // 1 if it can be won by playing in this move
+
         // 2 if it has already been won by him
         //-1 if it has already been won enemy
         int** bigboard = (int**) malloc(3*sizeof(int*));
@@ -103,6 +103,12 @@ void playbot(char**** board,int *x,int *y)
         int d[8];
         int de[8];
         int j;
+        int m;
+        for(m=0;m<8;m++)
+        {
+            d[m]=0;
+            de[m]=0;
+        }
         for(i=0;i<3;i++)
         {
             if(bigboard[i][i]==2)
@@ -132,13 +138,342 @@ void playbot(char**** board,int *x,int *y)
                 }
             }
         }
-        //
-        //int maxi=maxof(d,de);
-        if(maxi==0)
+
+        int g;
+        for(g=0;g<8;g++)
         {
-            //play in available square following the pre defined order
-            //while playing in the inner square just follow the pre defined order
+            if(de[g]==4)
+            {
+                if(g==1)
+                {if(bigboard[g][0]==0)
+                    {x=g;
+                    y=0;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][1]==0)
+                        {x=g;
+                    y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][2]==0)
+                        {x=g;
+                    y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==2)
+                                        {if(bigboard[g][0]==0)
+                    {x=g;
+                    y=0;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][1]==0)
+                        {*x=g;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][2]==0)
+                        {*x=g;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==3)
+                                   {if(bigboard[g][0]==0)
+                    {*x=g;
+                    *y=0;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g-3][1]==0)
+                        {*x=g-3;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g-3][2]==0)
+                        {*x=g-3;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==4)
+                                   {if(bigboard[0][g-3]==0)
+                    {*x=0;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][g-3]==0)
+                        {*x=1;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][g-3]==0)
+                        {*x=2;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==5)
+                    {if(bigboard[0][g-3]==0)
+                    {*x=0;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][g-3]==0)
+                        {*x=1;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][g-3]==0)
+                        {*x=2;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==6)
+                    {if(bigboard[0][0]==0)
+                    {*x=0;
+                        *y=0;
+
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][1]==0)
+                        {*x=1;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][2]==0)
+                        {*x=2;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==7)
+                    {if(bigboard[0][2]==0)
+                    {*x=0;
+                        *y=2;
+
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][1]==0)
+                        {*x=1;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][0]==0)
+                        {*x=0;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }//playingth line
+            }
         }
+        for(g=0;g<8;g++)
+        {
+            if(de[g]==2)
+            {
+                if(g==1)
+                {if(bigboard[g][0]==0)
+                    {x=g;
+                    y=0;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][1]==0)
+                        {x=g;
+                    y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][2]==0)
+                        {x=g;
+                    y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==2)
+                                        {if(bigboard[g][0]==0)
+                    {x=g;
+                    y=0;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][1]==0)
+                        {*x=g;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][2]==0)
+                        {*x=g;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==3)
+                                   {if(bigboard[g][0]==0)
+                    {*x=g;
+                    *y=0;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g-3][1]==0)
+                        {*x=g-3;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g-3][2]==0)
+                        {*x=g-3;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==4)
+                                   {if(bigboard[0][g-3]==0)
+                    {*x=0;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][g-3]==0)
+                        {*x=1;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][g-3]==0)
+                        {*x=2;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==5)
+                    {if(bigboard[0][g-3]==0)
+                    {*x=0;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][g-3]==0)
+                        {*x=1;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][g-3]==0)
+                        {*x=2;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==6)
+                    {if(bigboard[0][0]==0)
+                    {*x=0;
+                        *y=0;
+
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][1]==0)
+                        {*x=1;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][2]==0)
+                        {*x=2;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==7)
+                    {if(bigboard[0][2]==0)
+                    {*x=0;
+                        *y=2;
+
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][1]==0)
+                        {*x=1;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][0]==0)
+                        {*x=0;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   //play in gth line
+            }
+        }
+        for(g=0;g<8;g++)
+        {
+            if(de[g]==1)
+            {
+                if(g==1)
+                {if(bigboard[g][0]==0)
+                    {x=g;
+                    y=0;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][1]==0)
+                        {x=g;
+                    y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][2]==0)
+                        {x=g;
+                    y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==2)
+                                        {if(bigboard[g][0]==0)
+                    {x=g;
+                    y=0;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][1]==0)
+                        {*x=g;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g][2]==0)
+                        {*x=g;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==3)
+                                   {if(bigboard[g][0]==0)
+                    {*x=g;
+                    *y=0;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g-3][1]==0)
+                        {*x=g-3;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[g-3][2]==0)
+                        {*x=g-3;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==4)
+                                   {if(bigboard[0][g-3]==0)
+                    {*x=0;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][g-3]==0)
+                        {*x=1;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][g-3]==0)
+                        {*x=2;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==5)
+                    {if(bigboard[0][g-3]==0)
+                    {*x=0;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][g-3]==0)
+                        {*x=1;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][g-3]==0)
+                        {*x=2;
+                    *y=g-3;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==6)
+                    {if(bigboard[0][0]==0)
+                    {*x=0;
+                        *y=0;
+
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][1]==0)
+                        {*x=1;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][2]==0)
+                        {*x=2;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   else if(g==7)
+                    {if(bigboard[0][2]==0)
+                    {*x=0;
+                        *y=2;
+
+                    playbot(board,*x,*y);}
+                    else if(bigboard[1][1]==0)
+                        {*x=1;
+                    *y=1;
+                    playbot(board,*x,*y);}
+                    else if(bigboard[2][0]==0)
+                        {*x=0;
+                    *y=2;
+                    playbot(board,*x,*y);}
+                   }
+                   //play in gth line
+            }
+        }
+        int a,b;
+            int i;
+            a=1;b=1;
+            for(i=0;i<9;i++)
+            {
+                *x=playorder[i][0];
+                *y=playorder[i][1];
+                if(board[a][b][*x][*y]=='.')
+                {
+                    board[a][b][*x][*y]=player;
+                    return;
+                }
+            }
+
     }
 
 }
