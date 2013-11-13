@@ -1,8 +1,8 @@
-
 #include <math.h>
 #include <malloc.h>
 #include "gameio.h"
 int playorder[9][2]= {{1,1},{0,0},{2,2},{2,0},{0,2},{1,0},{0,1},{2,1},{1,2}};
+char** bigBoard;
 void playbot(char**** board,int *x,int *y);
 // Who has to play
 char player(char**** board) {
@@ -29,7 +29,7 @@ int main() {
     int i, j, k, l;
     int play;       // play has the square in which the last move was made (values = 0 to 80)
     char turn = player(board);
-    char** bigBoard = (char**) malloc(3*sizeof(char*));
+    bigBoard = (char**) malloc(3*sizeof(char*));
     for (i=0; i<3; i++) {
         bigBoard[i] = (char*) malloc(3*sizeof(char));
         for (j=0; j<3; j++) {
@@ -55,6 +55,22 @@ int main() {
     output2file(board,x,y);
     return 3*x+y;
 }
+
+void generatebigboard(int** bb) {
+    int i,j;
+    for(i=0; i<3; i++) {
+        for (j=0; j<3; j++) {
+            char t = player();
+            switch(bigBoard[i][j]){
+            case 1: bb[i][j]= (t=='X')?2:-1; break;
+            case 2: bb[i][j]= (t=='O')?2:-1; break;
+            case 0: bb[i][j]= -1; break;
+            default bb[i][j]= 0; break;
+            }
+        }
+    }
+}
+
 void playbot(char**** board,int *x,int *y)
 {
     int player=player(board);
@@ -92,14 +108,14 @@ void playbot(char**** board,int *x,int *y)
     {
         int i;
         //specifications of bigboard
-        // 0 if it hasent been won and cannot be won by playing in this move
+        // 0 if it hasent been won
 
         // 2 if it has already been won by him
         //-1 if it has already been won enemy
         int** bigboard = (int**) malloc(3*sizeof(int*));
         for (i=0; i<3; i++)
         bigboard[i] = (int*) malloc(3*sizeof(int));
-        bigboard=generatebigboard(board);
+        generatebigboard(bigboard);
         int d[8];
         int de[8];
         int j;
@@ -548,3 +564,4 @@ int lineplay(char**** board,int* x,int* y)
         }
     }
 }
+
