@@ -24,7 +24,7 @@ int main() {
     // Initialization
     int x, y;
     char**** board = input4D(&x, &y);
-    int i, j, k, l;
+    int i, j, k;
     int play;       // play has the square in which the last move was made (values = 0 to 80)
     char turn = player(board);
     char** bigBoard = (char**) malloc(3*sizeof(char*));
@@ -47,12 +47,35 @@ int main() {
     // Analysis
 
     //TODO: A lot of things here
-
+    if (x == -1) {
+        for (i=0; i<3; i++) {
+            for (j=0; j<3; j++) {
+                if (bigBoard[i][j] == '.') {
+                    x=i;
+                    y=j;
+                }
+            }
+        }
+    }
+    
+    for (i=0; i<3; i++) {
+        for (j=0; j<3; j++) {
+            if (board[x][y][i][j] == '.') {
+                play = 9*(3*x+i)+(3*y+j);
+                board[x][y][i][j] = turn;
+                x=i;
+                y=j;
+                i=j=3;
+            }
+        }
+    }
 
     // Output
-    if (check3x3(board[x][y]) != -1)
+    if (check3x3(board[x][y])!= -1) {
         x=y=-1;
+    }
     output2file(board,x,y);
+
     free(bigBoard);
     return play;
 }

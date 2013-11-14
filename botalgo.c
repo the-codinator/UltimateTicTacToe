@@ -3,9 +3,9 @@
 #include "stdlib.h"
 
 
-int bigboardvalue[3][3];          // same as tablLV[3][3]
-int smallboardvalue[3][3];   //same as tablSV[3][3]
-int outerboardvalue;    // same as tablV
+int bigboardvalue[3][3];          
+int smallboardvalue[3][3];   
+int outerboardvalue;    
 
 int main() {
     // Initialization
@@ -27,11 +27,6 @@ int main() {
     if (x!=-1 && y!=-1 && bigBoard[x][y]!='.')
         x=y=-1;
     playbot(board,x,y);
-
-    // Analysis
-
-    //TODO: A lot of things here
-
 
     // Output
     k=check3x3(board[x][y]);
@@ -62,6 +57,7 @@ int calcVal(char Table[3][3],char play,int *victory,int *full)
     int result = 0;
     int i,j,k;
 
+    // Horiz
     for(i=0;i<3;i++)
     {
         int linevaluehoriz = 0;
